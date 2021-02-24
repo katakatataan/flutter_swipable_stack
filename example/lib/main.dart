@@ -98,7 +98,7 @@ class _HomeState extends State<Home> {
                 final isDown = direction == SwipeDirection.down;
                 return Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: 16,
+                    horizontal: 32,
                   ).copyWith(
                     top: _topPadding + 16,
                   ),
@@ -126,17 +126,19 @@ class _HomeState extends State<Home> {
               },
               builder: (context, index, constraints) {
                 final imagePath = _images[index % _images.length];
-                return Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ).copyWith(
-                    top: _topPadding,
-                    bottom: _bottomPadding,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.asset(
-                      imagePath,
+                return Center(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ).copyWith(
+                      top: _topPadding,
+                      bottom: _bottomPadding,
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: Image.asset(
+                        imagePath,
+                      ),
                     ),
                   ),
                 );

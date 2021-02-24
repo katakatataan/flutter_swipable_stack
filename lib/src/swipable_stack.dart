@@ -17,7 +17,7 @@ class SwipableStackController extends ChangeNotifier {
   SwipableStackController({
     int initialIndex,
   })  : _currentIndex = initialIndex ?? 0,
-        assert(_currentIndex >= 0);
+        assert(initialIndex == null || initialIndex >= 0);
 
   /// The key for [SwipableStack] to control.
   final swipableStackStateKey = GlobalKey<_SwipableStackState>();
