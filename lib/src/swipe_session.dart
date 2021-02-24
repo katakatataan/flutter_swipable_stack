@@ -5,9 +5,9 @@ const double _fingerHeight = 50;
 /// The information to record swiping position for [SwipableStack].
 class SwipeSession {
   const SwipeSession({
-    required this.startPosition,
-    required this.currentPosition,
-    required this.localPosition,
+    @required this.startPosition,
+    @required this.currentPosition,
+    @required this.localPosition,
   });
 
   factory SwipeSession.notMoving() {
@@ -49,9 +49,9 @@ class SwipeSession {
       ')';
 
   SwipeSession copyWith({
-    Offset? startPosition,
-    Offset? currentPosition,
-    Offset? localPosition,
+    Offset startPosition,
+    Offset currentPosition,
+    Offset localPosition,
   }) =>
       SwipeSession(
         startPosition: startPosition ?? this.startPosition,
@@ -65,7 +65,7 @@ class SwipeSession {
   }
 
   /// Adjusted [localPosition] for user's finger.
-  Offset? get localFingerPosition {
+  Offset get localFingerPosition {
     return localPosition + const Offset(0, -_fingerHeight);
   }
 }
