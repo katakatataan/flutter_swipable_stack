@@ -126,14 +126,12 @@ class _HomeState extends State<Home> {
               },
               builder: (context, index, constraints) {
                 final imagePath = _images[index % _images.length];
-                return Center(
-                  child: Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ).copyWith(
-                      top: _topPadding,
-                      bottom: _bottomPadding,
-                    ),
+                return Padding(
+                  padding: EdgeInsets.only(
+                    top: _topPadding,
+                    bottom: _bottomPadding,
+                  ),
+                  child: Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(8),
                       child: Image.asset(

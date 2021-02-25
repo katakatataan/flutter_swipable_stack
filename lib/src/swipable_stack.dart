@@ -361,13 +361,7 @@ class _SwipableStackState extends State<SwipableStack>
         maxWidth: maxWidth,
         maxHeight: maxHeight,
       );
-      return maxDistance -
-          difference.dx.abs() +
-          _backMoveDistance(
-            moveDistance: difference.dx.abs(),
-            maxWidth: maxWidth,
-            maxHeight: maxHeight,
-          );
+      return maxDistance - difference.dx.abs();
     } else {
       return deviceSize.height - difference.dy.abs();
     }
@@ -438,6 +432,7 @@ class _SwipableStackState extends State<SwipableStack>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
+        _assertLayout(constraints);
         _areConstraints = constraints;
         return Stack(
           children: _buildCards(
@@ -447,6 +442,18 @@ class _SwipableStackState extends State<SwipableStack>
         );
       },
     );
+  }
+
+  void _assertLayout(BoxConstraints constraints) {
+    assert(() {
+      if (!constraints.hasBoundedHeight) {
+        throw FlutterError('SwipableStack was given unbounded height.');
+      }
+      if (!constraints.hasBoundedWidth) {
+        throw FlutterError('SwipableStack was given unbounded width.');
+      }
+      return true;
+    }());
   }
 
   List<Widget> _buildCards(BuildContext context, BoxConstraints constraints) {
@@ -844,7 +851,7 @@ class _SwipablePositioned extends StatelessWidget {
       : 0;
 
   static double calculateAngle(double differenceX, double areaWidth) {
-    return -differenceX / areaWidth * math.pi / 24;
+    return -differenceX / areaWidth * math.pi / 18;
   }
 
   Offset get _rotationOrigin => _isFirst ? session.localPosition : Offset.zero;
@@ -894,6 +901,7 @@ class _SwipablePositioned extends StatelessWidget {
       child: Transform.rotate(
         angle: _rotationAngle,
         origin: _rotationOrigin,
+        alignment: Alignment.topLeft,
         child: ConstrainedBox(
           constraints: _constraints(context),
           child: IgnorePointer(
